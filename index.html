@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <meta name="description" content="dash.js example" />
+        <meta name="author" content="Vualto" />
+        <title>Document</title>
+        <style>
+            h1 {
+                color: #721c24;
+                background-color: #f8d7da;
+                padding: 20px;
+            }
+            #vuplay-video {
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="vuplay-container">
+            <h1>
+                This demo works only with hls and browsers who support fairplay
+                (aka. safari)!
+            </h1>
+            <video
+                id="vuplay-video"
+                poster="vuplay_poster.png"
+                controls="controls"
+            ></video>
+        </div>
+        <script
+            type="text/javascript"
+            src="vuplay-native-hls-fairplay.js"
+        ></script>
+        <script>
+            (function() {
+                // Set your mpeg hls stream url
+                // TODO: replace by
+                // const hlsStream = <your-hls-stream-url>;
+                const hlsStream =
+                    "https://d1chyo78gdexn4.cloudfront.net/vualto-demo/elephants-dream/elephants-dream.ism/manifest.m3u8";
+
+                // Please login to https://admin.drm.technology to generate a vudrm token.
+                // Todo replace by:
+                // const vudrmToken = <your-vudrm-token>;
+                const vudrmToken =
+                    "vualto-demo|2019-12-10T12:58:57Z|RAQrLiTYv+Z8U9LrxO0JDw==|74086852d6267040403e0dcbfeaeada9d4b0283c";
+
+                const drmConfig = {
+                    drmToken: vudrmToken,
+                    drmKeySystem: "com.apple.fps.1_0",
+                    drmCertUrl:
+                        "https://fairplay-license.vudrm.tech/certificate",
+                    laUrl: "https://fairplay-license.vudrm.tech/license",
+                };
+
+                const videoElement = document.getElementById("vuplay-video");
+
+                VUDRMFairplayHLS(drmConfig, videoElement, function() {
+                    videoElement.setAttribute("src", hlsStream);
+                });
+            })();
+        </script>
+    </body>
+</html>

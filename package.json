@@ -1,0 +1,56 @@
+{
+  "name": "vuplay-native-hls-fairplay",
+  "version": "1.0.0",
+  "description": "A basic implementation of VUDRM using fairplay and dash with the native video element",
+  "main": "vuplay-native-hls-fairplay.js",
+  "scripts": {
+    "build": "grunt build && grunt serve",
+    "format:write": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,scss,md,html}\"",
+    "format:check": "prettier --list-different \"**/*.{ts,tsx,js,jsx,json,css,scss,md,html}\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vualto/vuplay-native-hls-fairplay.git"
+  },
+  "keywords": [
+    "vualto",
+    "vuplay",
+    "vudrm",
+    "video",
+    "native",
+    "hls",
+    "fairplay"
+  ],
+  "contributors": [
+    {
+      "name": "Mark Niland",
+      "email": "mark.niland@vualto.com",
+      "url": "https://github.com/maniland"
+    },
+    {
+      "name": "Lorenzo Koundouris",
+      "email": "lorenzo.koundouris@vualto.com",
+      "url": "https://github.com/lorenzo-vualto"
+    },
+    {
+      "name": "Stefano Nepa",
+      "email": "stefano.nepa@vualto.com",
+      "url": "https://github.com/stefanovualto"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Vualto/vuplay-native-hls-fairplay/issues"
+  },
+  "homepage": "https://github.com/Vualto/vuplay-native-hls-fairplay#readme",
+  "devDependencies": {
+    "grunt": "^1.0.4",
+    "grunt-concurrent": "^3.0.0",
+    "grunt-contrib-clean": "^2.0.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-connect": "^2.1.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "prettier": "^1.19.1"
+  }
+}
