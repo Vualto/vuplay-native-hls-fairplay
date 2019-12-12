@@ -41,8 +41,6 @@ For any question feel free to contact <support@vualto.com>
 -   [VUDRM](https://vudrm.vualto.com/)
 -   [VUDRM token documentation](https://docs.vualto.com/projects/vudrm/en/latest/VUDRM-token.html)
 
-#############################
-
 ### HTMLVideoELement
 
 -   [HTMLVideoElement in safari](https://developer.apple.com/documentation/webkitjs/htmlmediaelement)
