@@ -12,19 +12,16 @@
  * @param {function} certLoadedCallback - The callback executed once everything is done.
  */
 function VUDRMFairplayHLS(config, videoElement, certLoadedCallback) {
-    var keySessions = [];
-
     if (!DRMUtils.isFairPlaySupported(videoElement, config.drmKeySystem)) {
         console.error("[VUPLAY] > Fairplay not supported!");
         return;
     }
 
     var certificateRequest = createCertificateRequest(config);
-    certificateRequest.onload = CreateCertificateLoadedListener(
+    certificateRequest.onload = createCertificateLoadedListener(
         videoElement,
         certificateRequest,
         certLoadedCallback,
-        keySessions,
         config
     );
 
@@ -47,11 +44,10 @@ function createCertificateRequest(config) {
     return loadCertificateRequest;
 }
 
-function CreateCertificateLoadedListener(
+function createCertificateLoadedListener(
     videoElement,
     loadCertificateRequest,
     certLoadedCallback,
-    keySessions,
     config
 ) {
     return function onCertificateLoaded() {
@@ -68,8 +64,7 @@ function CreateCertificateLoadedListener(
         var needKeyEventListener = createNeedKeyListener(
             config,
             videoElement,
-            certificate,
-            keySessions
+            certificate
         );
         videoElement.addEventListener(
             "webkitneedkey",
@@ -81,16 +76,9 @@ function CreateCertificateLoadedListener(
     };
 }
 
-function createNeedKeyListener(config, videoElement, certificate, keySessions) {
-    return function createAndStoreNewKeySession(event) {
-        var keySession = createKeySession(
-            config,
-            videoElement,
-            event.initData,
-            certificate
-        );
-
-        keySessions.push(keySession);
+function createNeedKeyListener(config, videoElement, certificate) {
+    return function createNewKeySession(event) {
+        createKeySession(config, videoElement, event.initData, certificate);
     };
 }
 
