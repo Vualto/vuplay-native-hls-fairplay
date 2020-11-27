@@ -240,20 +240,15 @@ function addKeySessionListeners(keySession, contentId, config) {
 
 function createKeyMessageListener(contentId, config, keySession) {
     return function onKeyMessage(event) {
-        var body = {
-            token: config.drmToken,
-            contentId: contentId,
-            payload: Utils.base64EncodeUint8Array(event.message),
-        };
-        var jsonBody = JSON.stringify(body);
-
         var loadLicenseRequest = createLoadLicenseRequest(config);
         loadLicenseRequest.onload = createLoadListener(
             loadLicenseRequest,
             keySession
         );
 
-        loadLicenseRequest.send(jsonBody);
+        loadLicenseRequest.setRequestHeader("X-VUDRM-CONTENT-ID", contentId);
+        loadLicenseRequest.setRequestHeader("X-VUDRM-TOKEN", config.drmToken);
+        loadLicenseRequest.send(event.message);
     };
 }
 
@@ -264,7 +259,7 @@ function createLoadLicenseRequest(config) {
     loadLicenseRequest.timeout = 10000;
 
     loadLicenseRequest.open("POST", config.laUrl, true);
-    loadLicenseRequest.setRequestHeader("Content-Type", "application/json");
+    loadLicenseRequest.setRequestHeader("Content-Type", "application/octet-stream");
 
     loadLicenseRequest.onerror = console.error.bind(console);
     loadLicenseRequest.ontimeout = console.error.bind(console);
